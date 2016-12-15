@@ -3,10 +3,10 @@ package pl.krystiankaniowski.stackoverflowexplorer;
 import android.app.Application;
 
 import pl.krystiankaniowski.stackoverflowexplorer.dagger.components.ApplicationComponent;
+import pl.krystiankaniowski.stackoverflowexplorer.dagger.components.BaseComponent;
 import pl.krystiankaniowski.stackoverflowexplorer.dagger.components.DaggerApplicationComponent;
 import pl.krystiankaniowski.stackoverflowexplorer.dagger.components.DaggerBaseComponent;
 import pl.krystiankaniowski.stackoverflowexplorer.dagger.modules.ApplicationModule;
-import pl.krystiankaniowski.stackoverflowexplorer.dagger.components.BaseComponent;
 
 public class MainApplication extends Application {
 
