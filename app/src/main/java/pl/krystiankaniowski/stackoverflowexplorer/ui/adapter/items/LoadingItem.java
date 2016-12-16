@@ -9,4 +9,12 @@ public class LoadingItem implements ViewItem {
         return ViewItem.LOADING_ITEM;
     }
 
+    public static class Factory {
+
+        public static LoadingItem create() {
+            return new LoadingItem();
+        }
+
+    }
+
 }

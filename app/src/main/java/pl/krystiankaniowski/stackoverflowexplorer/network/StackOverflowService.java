@@ -1,11 +1,22 @@
 package pl.krystiankaniowski.stackoverflowexplorer.network;
 
-import android.util.Log;
+import java.util.List;
 
+import pl.krystiankaniowski.stackoverflowexplorer.network.data.Question;
+import pl.krystiankaniowski.stackoverflowexplorer.network.data.QuestionResponse;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class StackOverflowService {
+
+    public interface Callback {
+
+        void onDataReceive(List<Question> questions);
+
+        void onError(Throwable throwable);
+
+    }
 
     private StackExchangeApi api;
 
@@ -17,14 +28,15 @@ public class StackOverflowService {
         this.api = api;
     }
 
-    public void getQuestions(String pattern) {
+    public Subscription getQuestions(String pattern, final Callback callback) {
 
-        api.getQuestions(site, sort, order, pattern)
+        return api.getQuestions(site, sort, order, pattern)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map(QuestionResponse::getItems)
                 .subscribe(
-                        item -> Log.v("TAG", item.getItems().get(0).toString()),
-                        throwable -> Log.w("TAG", "error", throwable),
+                        callback::onDataReceive,
+                        callback::onError,
                         () -> {
                         }
                 );

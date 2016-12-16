@@ -2,6 +2,7 @@ package pl.krystiankaniowski.stackoverflowexplorer.network.data
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.ViewItem
 
 data class Question(
         @SerializedName("tags")
@@ -52,4 +53,8 @@ data class Question(
         @SerializedName("body")
         @Expose
         val body: String?
-)
+) : ViewItem {
+
+    override fun geViewType(): Int = ViewItem.QUESTION_ITEM
+
+}

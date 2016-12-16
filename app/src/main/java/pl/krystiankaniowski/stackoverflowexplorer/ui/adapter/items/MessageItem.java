@@ -19,4 +19,14 @@ public class MessageItem implements ViewItem {
         return ViewItem.MESSAGE_ITEM;
     }
 
+    public static class Factory {
+
+        public static MessageItem create(Throwable throwable){
+            return new MessageItem(throwable.getMessage());
+        }
+
+    }
+
+
+
 }

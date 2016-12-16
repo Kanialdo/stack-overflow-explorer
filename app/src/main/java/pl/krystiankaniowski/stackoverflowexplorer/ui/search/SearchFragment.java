@@ -9,8 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.jakewharton.rxbinding.widget.RxTextView;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import pl.krystiankaniowski.stackoverflowexplorer.R;
@@ -18,6 +21,8 @@ import pl.krystiankaniowski.stackoverflowexplorer.ui.BaseFragment;
 import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.BaseRecyclerViewAdapter;
 import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.ViewItem;
 import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.items.MessageItem;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class SearchFragment extends BaseFragment implements SearchContract.View {
 
@@ -31,6 +36,8 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     private BaseRecyclerViewAdapter adapter;
     private List<ViewItem> items = new ArrayList<>();
 
+    private CompositeSubscription compositeSubscription;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_search;
@@ -43,6 +50,8 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
         items.add(new MessageItem("No data to display"));
         adapter = new BaseRecyclerViewAdapter(items);
 
+        compositeSubscription = new CompositeSubscription();
+
     }
 
     @Nullable
@@ -54,13 +63,22 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
+        compositeSubscription.add(
+                RxTextView.textChanges(inputField)
+                        .skip(1)
+                        .debounce(1, TimeUnit.SECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .map(CharSequence::toString)
+                        .subscribe(text -> presenter.requestQuestionQuery(text))
+        );
+
         return view;
 
     }
 
     @Override
-    public void setData() {
-
+    public void setData(List<? extends ViewItem> items) {
+        adapter.update(items);
     }
 
     @Override
@@ -76,6 +94,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     @Override
     public void unsubscribePresenters() {
         presenter.unsubscribe();
+        compositeSubscription.clear();
     }
 
 }

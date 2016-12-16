@@ -8,6 +8,7 @@ import java.util.List;
 
 import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.delegates.LoadingDelegatedAdapter;
 import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.delegates.MessageDelegatedAdapter;
+import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.delegates.QuestionDelegatedAdapter;
 
 public class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
@@ -21,6 +22,7 @@ public class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder
 
         registerDelegatedAdapter(new LoadingDelegatedAdapter());
         registerDelegatedAdapter(new MessageDelegatedAdapter());
+        registerDelegatedAdapter(new QuestionDelegatedAdapter());
 
     }
 
