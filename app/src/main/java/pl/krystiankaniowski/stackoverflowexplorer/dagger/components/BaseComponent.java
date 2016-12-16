@@ -6,11 +6,14 @@ import dagger.Component;
 import pl.krystiankaniowski.stackoverflowexplorer.dagger.modules.CacheModule;
 import pl.krystiankaniowski.stackoverflowexplorer.dagger.modules.NetworkModule;
 import pl.krystiankaniowski.stackoverflowexplorer.dagger.scopes.ApplicationScope;
+import pl.krystiankaniowski.stackoverflowexplorer.network.StackOverflowService;
 
 @ApplicationScope
 @Component(modules = {CacheModule.class, NetworkModule.class}, dependencies = ApplicationComponent.class)
 public interface BaseComponent {
 
     SharedPreferences getSharedPreferences();
+
+    StackOverflowService getStackOverflowService();
 
 }
