@@ -34,8 +34,11 @@ public class QuestionDelegatedAdapter implements DelegatedAdapter {
         ViewHolder viewHolder = (ViewHolder) holder;
         Question item = (Question) viewItem;
 
-        viewHolder.text.setText(item.getTitle());
+        viewHolder.question.setText(item.getTitle());
+        viewHolder.author.setText(item.getOwner().getDisplayName());
         Picasso.with(context).load(item.getOwner().getProfileImage()).placeholder(android.R.drawable.btn_star).into(viewHolder.avatar);
+
+        item.getOwner().getDisplayName();
 
     }
 
@@ -46,10 +49,13 @@ public class QuestionDelegatedAdapter implements DelegatedAdapter {
 
     static class ViewHolder extends BaseViewHolder<LoadingItem> {
 
-        @BindView(android.R.id.text1)
-        TextView text;
+        @BindView(R.id.item_question_tv_question)
+        TextView question;
 
-        @BindView(android.R.id.icon)
+        @BindView(R.id.item_question_tv_author)
+        TextView author;
+
+        @BindView(R.id.item_question_iv_avatar)
         ImageView avatar;
 
         public ViewHolder(ViewGroup parent) {

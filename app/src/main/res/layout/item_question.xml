@@ -3,23 +3,40 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center_vertical"
-              android:padding="8dp"
-              android:orientation="horizontal">
+              android:orientation="horizontal"
+              android:background="?selectableItemBackground"
+              android:padding="16dp">
 
     <ImageView
-        android:id="@android:id/icon"
+        android:id="@+id/item_question_iv_avatar"
         android:layout_width="48dp"
-        android:src="@android:drawable/gallery_thumb"
-        android:layout_height="48dp"/>
+        android:layout_height="48dp"
+        android:src="@android:drawable/gallery_thumb"/>
 
-    <TextView
-        android:layout_marginLeft="16dp"
-        android:id="@android:id/text1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:singleLine="true"
-        android:text="@string/lorem_ipsum"
-        />
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_question_tv_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="@string/lorem_ipsum"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/item_question_tv_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="@string/lorem_ipsum"
+            android:textSize="12sp"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

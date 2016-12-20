@@ -20,6 +20,7 @@ import pl.krystiankaniowski.stackoverflowexplorer.R;
 import pl.krystiankaniowski.stackoverflowexplorer.ui.BaseFragment;
 import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.BaseRecyclerViewAdapter;
 import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.ViewItem;
+import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.decorators.SimpleDividerItemDecoration;
 import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.items.MessageItem;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -62,6 +63,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
 
         compositeSubscription.add(
                 RxTextView.textChanges(inputField)

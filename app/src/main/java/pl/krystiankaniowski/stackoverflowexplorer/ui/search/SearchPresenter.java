@@ -66,7 +66,11 @@ public class SearchPresenter implements SearchContract.Presenter {
 
         @Override
         public void onDataReceive(List<Question> questions) {
-            view.setData(questions);
+            if (questions.size()>0){
+                view.setData(questions);
+            } else {
+                view.setData(ViewItem.Wrapper.wrap(MessageItem.Factory.create("No data to display")));
+            }
         }
 
         @Override

@@ -4,13 +4,13 @@ import pl.krystiankaniowski.stackoverflowexplorer.ui.adapter.ViewItem;
 
 public class MessageItem implements ViewItem {
 
-    private String message;
+    private CharSequence message;
 
-    public MessageItem(String message) {
+    public MessageItem(CharSequence message) {
         this.message = message;
     }
 
-    public String getMessage() {
+    public CharSequence getMessage() {
         return message;
     }
 
@@ -21,12 +21,14 @@ public class MessageItem implements ViewItem {
 
     public static class Factory {
 
-        public static MessageItem create(Throwable throwable){
+        public static MessageItem create(Throwable throwable) {
             return new MessageItem(throwable.getMessage());
         }
 
+        public static MessageItem create(CharSequence text) {
+            return new MessageItem(text);
+        }
+
     }
-
-
 
 }
