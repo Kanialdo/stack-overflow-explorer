@@ -48,7 +48,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
         super.onCreate(savedInstanceState);
 
         items.add(new MessageItem("No data to display"));
-        adapter = new BaseRecyclerViewAdapter(items);
+        adapter = new BaseRecyclerViewAdapter(getActivity(), items);
 
         compositeSubscription = new CompositeSubscription();
 

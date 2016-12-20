@@ -1,5 +1,6 @@
 package pl.krystiankaniowski.stackoverflowexplorer.ui.adapter;
 
+import android.content.Context;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -16,13 +17,13 @@ public class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder
 
     private SparseArrayCompat<DelegatedAdapter> delegatedAdapters = new SparseArrayCompat<>();
 
-    public BaseRecyclerViewAdapter(List<? extends ViewItem> items) {
+    public BaseRecyclerViewAdapter(Context context, List<? extends ViewItem> items) {
 
         this.items = items;
 
         registerDelegatedAdapter(new LoadingDelegatedAdapter());
         registerDelegatedAdapter(new MessageDelegatedAdapter());
-        registerDelegatedAdapter(new QuestionDelegatedAdapter());
+        registerDelegatedAdapter(new QuestionDelegatedAdapter(context));
 
     }
 

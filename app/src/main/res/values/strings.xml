@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">StackOverflow Explorer</string>
     <string name="what_would_you_like_to_know">What would you like to know?</string>
+    <string name="lorem_ipsum">lorem ipsum</string>
 </resources>
